@@ -22,7 +22,7 @@ export default function Login() {
           }}
           className="m-auto"
         >
-          <h1 className="text-center mb-4">Login</h1>{" "}
+          <h1 className="text-center mb-4">Register</h1>{" "}
           <p className="m-2">
             <label htmlFor="email">Email ID</label>
           </p>
@@ -37,9 +37,13 @@ export default function Login() {
             <label htmlFor="password">Password</label>
           </p>
           <InputField type="password" name="password" id="password" />
+          <p className="m-1">
+            <label htmlFor="cpassword">Confirm Password</label>
+          </p>
+          <InputField type="cpassword" name="cpassword" id="cpassword" />
           <p className="text-center">
-            Don't have an account?{" "}
-            <Link to="/register" style={{ color: "#7278FF" }}>
+            Already have an account?{" "}
+            <Link to="/" style={{ color: "#7278FF" }}>
               Sign Up
             </Link>
           </p>
@@ -48,9 +52,4 @@ export default function Login() {
       </Container>
     </form>
   );
-}
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <Link to="/register">Sign Up</Link> */
 }
