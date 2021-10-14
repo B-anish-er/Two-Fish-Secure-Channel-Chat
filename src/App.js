@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Router, Switch } from "react-router";
+import "./App.css";
+import Login from "./components/Login";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        backgroundImage: "url(/bg.png)",
+        backgroundRepeat: "no-repeat",
+        position: "absolute",
+        width: "100%",
+        height: "100vh",
+        // border: "10px solid blue",
+      }}
+      className="fluid-container"
+    >
+      {/* <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+        </Switch>
+      </Router> */}
+      <Login />
     </div>
   );
 }
