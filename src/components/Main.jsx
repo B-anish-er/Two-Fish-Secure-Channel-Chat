@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router";
+
+import Chat from "./Chat";
+import CreateChat from "./CreateChat";
 import Login from "./Login";
 import Register from "./Register";
 import Welcome from "./WelcomeUser";
@@ -35,7 +38,8 @@ export default function Main() {
           path="/register"
           component={() => <Register setIsLoggedIn={setIsLoggedIn} />}
         />
-        <Route exact path="/createChat" component={null} />
+        <Route exact path="/createChat" component={CreateChat} />
+        <Route exact path="/chat" component={Chat} />
       </Switch>
       {/* <Login /> */}
     </div>
