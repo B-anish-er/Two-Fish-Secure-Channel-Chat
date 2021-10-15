@@ -7,7 +7,7 @@ export default function Welcome() {
     return (
       <div
       style={{
-        backgroundImage: "url(/bg.png)",
+        backgroundImage: "url(/bg2.png)",
         backgroundRepeat: "no-repeat",
         position: "absolute",
         width: "100%",

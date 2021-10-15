@@ -9,8 +9,8 @@ function App() {
   return (
     <Router>
       {/* <Main /> */}
-      <Chat />
-
+      {/* <Chat /> */}
+      <Welcome></Welcome>
     </Router>
   );
 }
