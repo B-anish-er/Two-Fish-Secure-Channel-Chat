@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function Welcome() {
-    return (
-      <div
+  return (
+    <div
       style={{
         backgroundImage: "url(/bg2.png)",
         backgroundRepeat: "no-repeat",
@@ -14,55 +14,54 @@ export default function Welcome() {
         height: "100vh",
         // border: "10px solid blue",
       }}
-      className="fluid-container">
+      className="fluid-container"
+    >
       <Center>
         <Container>
-            <Heading>Hello <br></br>Name</Heading>
-            <Button>
-            <Link to="/">
-              Get Started ->
-            </Link>
-            </Button> 
+          <Heading>
+            Hello <br />
+            Name
+          </Heading>
+          <Button>
+            <Link to="/createChat">Get Started -{">"}</Link>
+          </Button>
         </Container>
-        
       </Center>
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
 const Heading = styled.h1`
-    font-size: 7em;
-    font-weight: 700;
-    font-family: Montserrat, arial, sans-serif;
-`
+  font-size: 7em;
+  font-weight: 700;
+  font-family: Montserrat, arial, sans-serif;
+`;
 const Center = styled.div`
-
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-`
+`;
 const Container = styled.div`
   padding: 0;
   margin: 0;
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Button = styled.button`
-    margin-top: 80px;
-    width: 25%;
-    min-width: 200px;
-    height: 50px;
-    background: white;
-    color: black;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    font-family:Montserrat;
-    font-weight:600;
-
-`
+  margin-top: 80px;
+  width: 25%;
+  min-width: 200px;
+  height: 50px;
+  background: white;
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  font-family: Montserrat;
+  font-weight: 600;
+`;

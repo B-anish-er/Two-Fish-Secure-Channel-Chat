@@ -1,13 +1,19 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-import "./Login.css";
+import { useHistory } from "react-router";
 import { Container } from "react-bootstrap";
 import InputField from "./InputField";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+import { StyledButton } from "./Button";
+
+export default function Register({ setIsLoggedIn }) {
+  const history = useHistory();
+  const sendRegister = () => {
+    setIsLoggedIn(true);
+    history.push("/");
+  };
   return (
-    <form action="sendLogin()" method="post">
+    <form>
       <Container
         style={{
           // border: "1px solid red",
@@ -47,7 +53,9 @@ export default function Login() {
               Sign Up
             </Link>
           </p>
-          <input type="submit" className="btn" value="Continue" />
+          <StyledButton type="submit" onClick={sendRegister}>
+            Continue
+          </StyledButton>
         </div>
       </Container>
     </form>
