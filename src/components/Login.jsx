@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { Container } from "react-bootstrap";
-import InputField from "./InputField";
 import { Link } from "react-router-dom";
 
+import InputField from "./InputField";
 import { StyledButton } from "./Button";
 
 export default function Login({ setIsLoggedIn }) {
