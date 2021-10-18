@@ -11,36 +11,37 @@ import chat1 from "./chatExample";
 
 export default function Chat() {
   return (
-<<<<<<< HEAD
-    <div>
-      <StyledLeftBubble></StyledLeftBubble>
-      <StyledRightBubble></StyledRightBubble>
-    </div>
-    
-    
-=======
+    // <div>
+    //   <StyledLeftBubble></StyledLeftBubble>
+    //   <StyledRightBubble></StyledRightBubble>
+    // </div>
     <Container
       style={{
-        // border: "1px solid red",
+        border: "1px solid red",
         minHeight: "100vh",
+        // minWidth: "600px",
       }}
       className="d-flex align-items-center"
     >
       <div
         style={{
-          minWidth: "50%",
+          border: "1px solid yellow",
+          minWidth: "600px",
           padding: "10%",
         }}
-        className="m-auto "
+        className="m-auto"
       >
         <StyledLeftBubble>
-          adofhadlihfaofdijamdoighadfoia sdfuhaofuh sdbfk asksudufbakdjf
-          uiuaafiauhf
+          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
         </StyledLeftBubble>
-        <StyledRightBubble>adofhadlihfaofdijamdoighadfoia</StyledRightBubble>
+        <StyledRightBubble>
+          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+        </StyledRightBubble>
+        <StyledRightBubble>
+          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+        </StyledRightBubble>
       </div>{" "}
     </Container>
->>>>>>> c474dea86720947336db575a3000a9f1053931da
   );
 }
 
@@ -49,6 +50,8 @@ const StyledLeftBubble = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 12px 20px;
+  margin: 30px 250px 30px 0;
+  // border: 1px solid green;
 
   // position: absolute;
   min-width: 287px;
@@ -75,9 +78,10 @@ const StyledRightBubble = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 12px 20px;
+  margin: 30px 0 30px 250px;
 
   min-width: 287px;
-  // max-width: 400px;
+  max-width: 400px;
   min-height: 44px;
 
   /* Color / Blue */
@@ -95,5 +99,4 @@ const StyledRightBubble = styled.div`
   order: 1;
   align-self: center;
   flex-grow: 0;
-  margin: 6px 0px;
 `;

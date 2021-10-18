@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import {[;++++]}
+// import {[;++++]}
 
 function EnterEncryption() {
   return (
     <Container>
       <Box>
-        <Heading>
-            Enter Encrytion Key
-        </Heading>
+        <Heading>Enter Encrytion Key</Heading>
         <KeyBox>
-            <input type="text" placeholder="Enter Encrytion Key"></input>
-            <i class="fas fa-paper-plane"></i>
+          <input type="text" placeholder="Enter Encrytion Key"></input>
+          <i class="fas fa-paper-plane"></i>
         </KeyBox>
       </Box>
     </Container>
@@ -38,7 +36,7 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #0C101E;
+  background: #0c101e;
   height: 50vh;
   min-height: 50%;
   max-height: 50%;
@@ -50,18 +48,18 @@ const Box = styled.div`
 `;
 
 const Heading = styled.h1`
-    text-align: center;
-    font-family: 'Montserrat';
-    ont-size:calc(22px + 1.5vw);
-    font-weight: bold;
-    color: #ffffff;
-    margin-top: 20px;
-`
+  text-align: center;
+  font-family: "Montserrat";
+  ont-size: calc(22px + 1.5vw);
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 20px;
+`;
 
 const KeyBox = styled.div`
   margin-top: 100px;
   display: grid;
-  grid-template-columns: 90% 10% ;
+  grid-template-columns: 90% 10%;
   height: 52px;
   width: 75%;
   background: white;
@@ -75,6 +73,6 @@ const KeyBox = styled.div`
     outline: none !important;
   }
   input:focus {
-  outline: 0px transperent;
-}
+    outline: 0px transperent;
+  }
 `;

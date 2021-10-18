@@ -6,7 +6,7 @@ import CreateChat from "./CreateChat";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Welcome from "./WelcomeUser";
-import EnterEncryption from "./components/EnterEncryption";
+import EnterEncryption from "./EnterEncryption";
 
 export default function Main() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,12 +23,12 @@ export default function Main() {
       className="fluid-container"
     >
       <Switch>
-        {/* <Redirect exact path="/" to="/login" /> */}
-        {isLoggedIn ? (
+        <Redirect exact path="/" to="/login" />
+        {/* {isLoggedIn ? (
           <Route exact path="/" component={Welcome} />
         ) : (
           <Redirect exact path="/" to="/login" />
-        )}
+        )} */}
         <Route
           exact
           path="/login"
