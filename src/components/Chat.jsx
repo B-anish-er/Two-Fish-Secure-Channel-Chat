@@ -7,9 +7,12 @@ import chat1 from "./chatExample";
 
 export default function Chat() {
   return (
-    <StyledLeftBubble>
-      <StyledRightBubble />
-    </StyledLeftBubble>
+    <div>
+      <StyledLeftBubble></StyledLeftBubble>
+      <StyledRightBubble></StyledRightBubble>
+    </div>
+    
+    
   );
 }
 
