@@ -11,6 +11,14 @@ import chat1 from "./chatExample";
 
 export default function Chat() {
   return (
+<<<<<<< HEAD
+    <div>
+      <StyledLeftBubble></StyledLeftBubble>
+      <StyledRightBubble></StyledRightBubble>
+    </div>
+    
+    
+=======
     <Container
       style={{
         // border: "1px solid red",
@@ -32,6 +40,7 @@ export default function Chat() {
         <StyledRightBubble>adofhadlihfaofdijamdoighadfoia</StyledRightBubble>
       </div>{" "}
     </Container>
+>>>>>>> c474dea86720947336db575a3000a9f1053931da
   );
 }
 
