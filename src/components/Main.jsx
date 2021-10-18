@@ -3,8 +3,8 @@ import { Redirect, Route, Switch } from "react-router";
 
 import Chat from "./Chat";
 import CreateChat from "./CreateChat";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 import Welcome from "./WelcomeUser";
 
 export default function Main() {
