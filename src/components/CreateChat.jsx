@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import InputField from "./InputField";
 
-export default function CreateChat() {
+export default function CreateChat({ username }) {
   const [connect, setConnect] = useState("");
+  const [connections, setConnections] = useState([]);
+
+  useEffect(() => {
+    setConnections([
+      { name: "Shagun" },
+      { name: "Anish" },
+      { name: "John" },
+      { name: "Doe" },
+    ]);
+  }, []);
 
   return (
     <Container
@@ -22,8 +33,16 @@ export default function CreateChat() {
         className="m-auto"
       >
         <h1 className="text-center mb-4">Connect With</h1>{" "}
+        {connections &&
+          connections.map((value) => (
+            <Link to="/">
+              {" "}
+              <h4>{value.name}</h4>{" "}
+            </Link>
+          ))}
+        <br />
         <p className="m-2">
-          <label htmlFor="connectname">Username</label>
+          <label htmlFor="connectname">New Connection</label>
         </p>
         <InputField
           required

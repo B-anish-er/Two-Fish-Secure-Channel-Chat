@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Container } from "react-bootstrap";
+// import { Link } from "react-router-dom";
+
+// import InputField from "./InputField";
 
 import chat1 from "./chatExample";
 
@@ -7,12 +11,36 @@ import chat1 from "./chatExample";
 
 export default function Chat() {
   return (
+<<<<<<< HEAD
     <div>
       <StyledLeftBubble></StyledLeftBubble>
       <StyledRightBubble></StyledRightBubble>
     </div>
     
     
+=======
+    <Container
+      style={{
+        // border: "1px solid red",
+        minHeight: "100vh",
+      }}
+      className="d-flex align-items-center"
+    >
+      <div
+        style={{
+          minWidth: "50%",
+          padding: "10%",
+        }}
+        className="m-auto "
+      >
+        <StyledLeftBubble>
+          adofhadlihfaofdijamdoighadfoia sdfuhaofuh sdbfk asksudufbakdjf
+          uiuaafiauhf
+        </StyledLeftBubble>
+        <StyledRightBubble>adofhadlihfaofdijamdoighadfoia</StyledRightBubble>
+      </div>{" "}
+    </Container>
+>>>>>>> c474dea86720947336db575a3000a9f1053931da
   );
 }
 
@@ -22,12 +50,14 @@ const StyledLeftBubble = styled.div`
   align-items: flex-start;
   padding: 12px 20px;
 
-  position: absolute;
-  width: 287px;
-  height: 44px;
+  // position: absolute;
+  min-width: 287px;
+  max-width: 400px;
+  min-height: 44px;
 
   /* Color / Blue */
 
+  color: #1868fb;
   background: #fff;
   /* Elevation 100 */
 
@@ -46,9 +76,9 @@ const StyledRightBubble = styled.div`
   align-items: flex-start;
   padding: 12px 20px;
 
-  position: static;
-  width: 287px;
-  height: 44px;
+  min-width: 287px;
+  // max-width: 400px;
+  min-height: 44px;
 
   /* Color / Blue */
 
@@ -57,7 +87,7 @@ const StyledRightBubble = styled.div`
 
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.24), 0px 2px 4px rgba(0, 0, 0, 0.16),
     0px -1px 1px rgba(0, 0, 0, 0.08);
-  border-radius: 0px 24px 24px 24px;
+  border-radius: 24px 0 24px 24px;
 
   /* Inside Auto Layout */
 
