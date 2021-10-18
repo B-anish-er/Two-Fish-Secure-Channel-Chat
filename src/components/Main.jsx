@@ -6,6 +6,7 @@ import CreateChat from "./CreateChat";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Welcome from "./WelcomeUser";
+import EnterEncryption from "./components/EnterEncryption";
 
 export default function Main() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +41,7 @@ export default function Main() {
         />
         <Route exact path="/createChat" component={CreateChat} />
         <Route exact path="/chat" component={Chat} />
+        <Route exact path="/encryption" component={EnterEncryption} />
       </Switch>
       {/* <Login /> */}
     </div>
