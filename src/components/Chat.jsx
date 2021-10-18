@@ -17,33 +17,82 @@ export default function Chat() {
     // </div>
     <Container
       style={{
-        border: "1px solid red",
-        minHeight: "100vh",
+        // border: "1px solid red",
+        maxHeight: "100vh",
         // minWidth: "600px",
       }}
       className="d-flex align-items-center"
     >
-      <div
-        style={{
-          border: "1px solid yellow",
-          minWidth: "600px",
-          padding: "10%",
-        }}
-        className="m-auto"
-      >
-        <StyledLeftBubble>
-          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-        </StyledLeftBubble>
-        <StyledRightBubble>
-          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-        </StyledRightBubble>
-        <StyledRightBubble>
-          aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-        </StyledRightBubble>
-      </div>{" "}
+      {" "}
+      <ChatWindow className="m-auto">
+        <GrpName>
+          <p>Some Name</p>
+        </GrpName>
+        <Scrollable className="m-auto">
+          <StyledLeftBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledLeftBubble>
+          <StyledRightBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledRightBubble>
+          <StyledRightBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledRightBubble>
+          <StyledLeftBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledLeftBubble>
+          <StyledLeftBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledLeftBubble>
+          <StyledRightBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledRightBubble>
+          <StyledRightBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledRightBubble>
+          <StyledLeftBubble>
+            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
+          </StyledLeftBubble>
+        </Scrollable>{" "}
+        <ChatInput>
+          <input placeholder="Type Your Message"></input>
+          <p>send icon</p>
+        </ChatInput>
+      </ChatWindow>
     </Container>
   );
 }
+
+const ChatWindow = styled.div`
+  height: 100vh;
+  // maxheight: 100vh;
+  background-image: url(../chatbg.png);
+  background-size: cover;
+  background-position: center;
+`;
+
+const Scrollable = styled.div`
+  overflow-y: scroll;
+  min-width: 600px;
+  padding: 10%;
+  max-height: 80%;
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #1f43b1;
+  }
+`;
 
 const StyledLeftBubble = styled.div`
   display: flex;
@@ -60,8 +109,8 @@ const StyledLeftBubble = styled.div`
 
   /* Color / Blue */
 
-  color: #1868fb;
-  background: #fff;
+  background: #1868fb;
+
   /* Elevation 100 */
 
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.24), 0px 2px 4px rgba(0, 0, 0, 0.16),
@@ -85,8 +134,8 @@ const StyledRightBubble = styled.div`
   min-height: 44px;
 
   /* Color / Blue */
-
-  background: #1868fb;
+  color: #fff;
+  background: #00bf9d;
   /* Elevation 100 */
 
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.24), 0px 2px 4px rgba(0, 0, 0, 0.16),
@@ -99,4 +148,51 @@ const StyledRightBubble = styled.div`
   order: 1;
   align-self: center;
   flex-grow: 0;
+`;
+
+const GrpName = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  max-height: 80px;
+  height: 5em;
+  width: 100%;
+  background: #090909;
+  border: 1px solid transparent;
+  border-radius: 0 0 20px 20px;
+  p {
+    font-family: Montserrat;
+    margin: 0 0 0 30px;
+    font-weight: 500;
+    font-size: 40px;
+  }
+  // border: 1px solid red;
+`;
+
+const ChatInput = styled.div`
+  width: 90%;
+  background-color: #313131;
+  margin: 10px 20px;
+  height: 49px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 85% 15%;
+  padding: 0 0.4rem;
+  position: relative;
+
+  input {
+    padding-left: 50px;
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 1rem;
+    color: white;
+  }
+
+  input::placeholder {
+    color: #fofofo;
+    font-weight: 500;
+  }
 `;

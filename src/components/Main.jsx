@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router";
 
 import Chat from "./Chat";
+import Chat2 from "./ChatInterface";
 import CreateChat from "./CreateChat";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
@@ -42,6 +43,7 @@ export default function Main() {
         <Route exact path="/createChat" component={CreateChat} />
         <Route exact path="/chat" component={Chat} />
         <Route exact path="/encryption" component={EnterEncryption} />
+        <Route exact path="testing" component={Chat2} />
       </Switch>
       {/* <Login /> */}
     </div>
