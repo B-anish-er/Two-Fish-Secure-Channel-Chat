@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router";
 
 import Chat from "./Chat";
+import Chat2 from "./ChatInterface";
 import CreateChat from "./CreateChat";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 import Welcome from "./WelcomeUser";
+import EnterEncryption from "./EnterEncryption";
 
 export default function Main() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,12 +24,12 @@ export default function Main() {
       className="fluid-container"
     >
       <Switch>
-        {/* <Redirect exact path="/" to="/login" /> */}
-        {isLoggedIn ? (
+        <Redirect exact path="/" to="/login" />
+        {/* {isLoggedIn ? (
           <Route exact path="/" component={Welcome} />
         ) : (
           <Redirect exact path="/" to="/login" />
-        )}
+        )} */}
         <Route
           exact
           path="/login"
@@ -40,6 +42,8 @@ export default function Main() {
         />
         <Route exact path="/createChat" component={CreateChat} />
         <Route exact path="/chat" component={Chat} />
+        <Route exact path="/encryption" component={EnterEncryption} />
+        <Route exact path="testing" component={Chat2} />
       </Switch>
       {/* <Login /> */}
     </div>
