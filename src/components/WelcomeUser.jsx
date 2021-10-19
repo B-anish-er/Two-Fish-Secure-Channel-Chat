@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-// import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import authContext from "../context/auth/authContext";
+import { StyledButton } from "./Button";
+
 export default function Welcome() {
+  const { loadUser, logout, user } = useContext(authContext);
+
+  useEffect(() => loadUser(), []);
   return (
     <div
       style={{
@@ -20,11 +25,19 @@ export default function Welcome() {
         <Container>
           <Heading>
             Hello <br />
-            Name
+            {/* {JSON.stringify(user)} */}
+            {user && user.name}
           </Heading>
-          <Button>
-            <Link to="/createChat">Get Started -{">"}</Link>
-          </Button>
+          <StyledButton>
+            <Link to="/createChat" style={{ all: "unset" }}>
+              Get Started -{">"}
+            </Link>
+          </StyledButton>
+          <StyledButton>
+            <Link onClick={() => logout()} to="#!" style={{ all: "unset" }}>
+              Logout
+            </Link>
+          </StyledButton>
         </Container>
       </Center>
     </div>
@@ -53,15 +66,15 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
-  margin-top: 80px;
-  width: 25%;
-  min-width: 200px;
-  height: 50px;
-  background: white;
-  color: black;
-  border: 1px solid transparent;
-  border-radius: 20px;
-  font-family: Montserrat;
-  font-weight: 600;
-`;
+// const Button = styled.button`
+//   margin-top: 80px;
+//   width: 25%;
+//   min-width: 200px;
+//   height: 50px;
+//   background: white;
+//   color: black;
+//   border: 1px solid transparent;
+//   border-radius: 20px;
+//   font-family: Montserrat;
+//   font-weight: 600;
+// `;
