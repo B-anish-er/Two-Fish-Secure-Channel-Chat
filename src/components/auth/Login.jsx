@@ -8,7 +8,7 @@ import AlertContext from "../../context/alert/alertContext";
 import InputField from "../InputField";
 import { StyledButton } from "../Button";
 
-export default function Login({ setIsLoggedIn }) {
+export default function Login() {
   const history = useHistory();
   // const sendLogin = () => {
   //   setIsLoggedIn(true);

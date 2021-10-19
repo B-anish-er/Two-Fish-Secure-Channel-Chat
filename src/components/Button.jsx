@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  max-width: 500px;
+  max-width: 300px;
   width: 100%;
   background-color: #5995fd;
   border: none;
@@ -11,7 +11,7 @@ export const StyledButton = styled.button`
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
-  margin: 10px 0;
+  margin: 10px auto;
   cursor: pointer;
   transition: 0.5s;
 

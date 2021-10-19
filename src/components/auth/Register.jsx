@@ -4,13 +4,16 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import AuthContext from "../../context/auth/authContext";
+import AlertContext from "../../context/alert/alertContext";
 import InputField from "../InputField";
 import { StyledButton } from "../Button";
 
-export default function Register({ setIsLoggedIn }) {
+export default function Register() {
   const history = useHistory();
   const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
+  const { alerts, setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,7 +24,7 @@ export default function Register({ setIsLoggedIn }) {
       clearErrors();
     }
     // eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
+  }, [error, isAuthenticated]);
 
   const [user, setUser] = useState({
     name: "",
@@ -38,17 +41,14 @@ export default function Register({ setIsLoggedIn }) {
     e.preventDefault();
     if (name === "" || email === "" || password === "") {
     } else if (password !== cpassword) {
+      setAlert("Password and Confirm Password do not match", "important");
     } else {
-      register({
-        name,
-        email,
-        password,
-      });
+      register({ name, email, password });
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form name="authForm" id="authForm" onSubmit={onSubmit}>
       <Container
         style={{
           // border: "1px solid red",
@@ -97,16 +97,20 @@ export default function Register({ setIsLoggedIn }) {
             id="password"
             value={password}
             onChange={onChange}
+            minlength="6"
+            required
           />
           <p className="m-1">
             <label htmlFor="cpassword">Confirm Password</label>
           </p>
           <InputField
-            type="cpassword"
+            type="password"
             name="cpassword"
             id="cpassword"
             value={cpassword}
             onChange={onChange}
+            minlength="6"
+            required
           />
           <p className="text-center">
             Already have an account?{" "}
@@ -115,6 +119,7 @@ export default function Register({ setIsLoggedIn }) {
             </Link>
           </p>
           <StyledButton type="submit">Continue</StyledButton>
+          <p>Error: {error}</p>
         </div>
       </Container>
     </form>
