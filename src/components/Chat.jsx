@@ -1,15 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 // import InputField from "./InputField";
 
-import chat1 from "./chatExample";
+import authContext from "../context/auth/authContext";
+import ConnectContext from "../context/connect/connectContext";
+import { twofish } from "twofish";
 
 // import * as Chats from "../chatExample.json";
 
 export default function Chat() {
+  const [messages, setMessages] = useState(null);
+  const { user } = useContext(authContext);
+  const { selectedConnection } = useContext(ConnectContext);
+
+  const getMessages = useCallback(async () => {
+    const res = await axios({
+      method: "GET",
+      url: `http://localhost:8000/api/messages?username=${user.name}&connectname=${selectedConnection}`,
+    });
+    setMessages(res.data);
+  }, [selectedConnection, user.name]);
+
+  useEffect(() => {
+    var IV = [
+      0xb4, 0x6a, 0x02, 0x60, 0xb0, 0xbc, 0x49, 0x22, 0xb5, 0xeb, 0x07, 0x85,
+      0xa4, 0xb7, 0xcc, 0x9e,
+    ];
+    getMessages();
+    messages.map((value) => {
+      let plainMessage = twofish(IV).decryptCBC(value.message);
+      return { ...value, message: plainMessage };
+    });
+  }, [getMessages, messages]);
+
   return (
     // <div>
     //   <StyledLeftBubble></StyledLeftBubble>
@@ -53,6 +80,13 @@ export default function Chat() {
           <StyledLeftBubble>
             aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
           </StyledLeftBubble>
+          {messages.map((message) => {
+            return message.speaker === user.name ? (
+              <StyledRightBubble>message.message</StyledRightBubble>
+            ) : (
+              <StyledLeftBubble>message.message</StyledLeftBubble>
+            );
+          })}
         </Scrollable>{" "}
         <ChatInput>
           <input placeholder="Type Your Message"></input>

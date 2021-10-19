@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import connectContext from "../context/connect/connectContext";
 
 import InputField from "./InputField";
+import { StyledButton } from "./Button";
 
 export default function CreateChat({ username }) {
   const [connect, setConnect] = useState("");
-  const [connections, setConnections] = useState([]);
+  const { connections, getAllConnections, selectConnection, createConnection } =
+    useContext(connectContext);
 
   useEffect(() => {
-    setConnections([
-      { name: "Shagun" },
-      { name: "Anish" },
-      { name: "John" },
-      { name: "Doe" },
-    ]);
-  }, []);
+    getAllConnections(username);
+  }, [username]);
+
+  const sendConnection = () => {
+    createConnection(connect);
+  };
 
   return (
     <Container
@@ -35,7 +37,7 @@ export default function CreateChat({ username }) {
         <h1 className="text-center mb-4">Connect With</h1>{" "}
         {connections &&
           connections.map((value) => (
-            <Link to="/">
+            <Link to="/" onClick={() => selectConnection(value)}>
               {" "}
               <h4>{value.name}</h4>{" "}
             </Link>
@@ -44,13 +46,18 @@ export default function CreateChat({ username }) {
         <p className="m-2">
           <label htmlFor="connectname">New Connection</label>
         </p>
-        <InputField
-          required
-          type="email"
-          name="connectname"
-          id="connectname"
-          placeholder="johndoe123"
-        />
+        <div>
+          <InputField
+            required
+            type="text"
+            name="connectname"
+            id="connectname"
+            placeholder="johndoe123"
+            value={connect}
+            onChange={(e) => setConnect(e.target.value)}
+          />
+          <StyledButton onClick={sendConnection}>Continue</StyledButton>
+        </div>
         {/* <StyledButton type="submit" onClick={sendLogin}>
         Continue
       </StyledButton> */}

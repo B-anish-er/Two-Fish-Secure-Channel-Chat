@@ -4,16 +4,13 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import AuthContext from "../../context/auth/authContext";
-import AlertContext from "../../context/alert/alertContext";
 import InputField from "../InputField";
 import { StyledButton } from "../Button";
 
 export default function Register() {
   const history = useHistory();
   const authContext = useContext(AuthContext);
-  const alertContext = useContext(AlertContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
-  const { alerts, setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -41,7 +38,7 @@ export default function Register() {
     e.preventDefault();
     if (name === "" || email === "" || password === "") {
     } else if (password !== cpassword) {
-      setAlert("Password and Confirm Password do not match", "important");
+      // setAlert("Password and Confirm Password do not match", "important");
     } else {
       register({ name, email, password });
     }
@@ -119,7 +116,6 @@ export default function Register() {
             </Link>
           </p>
           <StyledButton type="submit">Continue</StyledButton>
-          <p>Error: {error}</p>
         </div>
       </Container>
     </form>

@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 // import {[;++++]}
 
-function EnterEncryption() {
+function EnterEncryption({ setKey }) {
   return (
     <Container>
       <Box>
         <Heading>Enter Encrytion Key</Heading>
         <KeyBox>
-          <input type="text" placeholder="Enter Encrytion Key"></input>
+          <input
+            type="text"
+            placeholder="Enter Encryption Key"
+            onChange={(e) => setKey(e.target.value)}
+          />
           <i class="fas fa-paper-plane"></i>
         </KeyBox>
       </Box>

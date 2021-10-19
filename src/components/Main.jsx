@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 
 import Chat from "./Chat";
@@ -11,6 +11,12 @@ import EnterEncryption from "./EnterEncryption";
 import PrivateRoute from "./routing/PrivateRoute";
 
 export default function Main() {
+  const [key, setKey] = useState("");
+
+  useEffect(() => {
+    if (!localStorage.getItem("key")) localStorage.setItem("key", key);
+  }, [key]);
+
   return (
     <div
       style={{
@@ -30,7 +36,11 @@ export default function Main() {
         <PrivateRoute exact path="/" component={() => <Welcome />} />
         <PrivateRoute exact path="/createChat" component={CreateChat} />
         <PrivateRoute exact path="/chat" component={Chat} />
-        <PrivateRoute exact path="/encryption" component={EnterEncryption} />
+        <PrivateRoute
+          exact
+          path="/encryption"
+          component={() => <EnterEncryption setKey={setKey} />}
+        />
         <Route exact path="testing" component={Chat2} />
       </Switch>
     </div>
