@@ -5,18 +5,29 @@ import connectContext from "../context/connect/connectContext";
 
 import InputField from "./InputField";
 import { StyledButton } from "./Button";
+import authContext from "../context/auth/authContext";
+// import alertContext from "../context/alert/alertContext";
 
-export default function CreateChat({ username }) {
+export default function CreateChat() {
   const [connect, setConnect] = useState("");
-  const { connections, getAllConnections, selectConnection, createConnection } =
-    useContext(connectContext);
+  const {
+    connections,
+    error,
+    getAllConnections,
+    selectConnection,
+    createConnection,
+  } = useContext(connectContext);
+  const { loadUser, user } = useContext(authContext);
+  // const { alerts, setAlert } = useContext(alertContext);
 
+  useEffect(() => !user && loadUser(), []);
   useEffect(() => {
-    getAllConnections(username);
-  }, [username]);
+    getAllConnections(user.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.name]);
 
   const sendConnection = () => {
-    createConnection(connect);
+    createConnection(connect, user.name);
   };
 
   return (
@@ -36,10 +47,10 @@ export default function CreateChat({ username }) {
       >
         <h1 className="text-center mb-4">Connect With</h1>{" "}
         {connections &&
-          connections.map((value) => (
-            <Link to="/" onClick={() => selectConnection(value)}>
+          Object.keys(connections).map((value) => (
+            <Link to="/" key={value} onClick={() => selectConnection(value)}>
               {" "}
-              <h4>{value.name}</h4>{" "}
+              <h4>{value}</h4>{" "}
             </Link>
           ))}
         <br />
@@ -57,6 +68,9 @@ export default function CreateChat({ username }) {
             onChange={(e) => setConnect(e.target.value)}
           />
           <StyledButton onClick={sendConnection}>Continue</StyledButton>
+          {error && (
+            <p style={{ color: "red" }}>Error: {JSON.stringify(error)} </p>
+          )}
         </div>
         {/* <StyledButton type="submit" onClick={sendLogin}>
         Continue

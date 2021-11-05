@@ -8,6 +8,7 @@ import { StyledButton } from "./Button";
 export default function Welcome() {
   const { loadUser, logout, user } = useContext(authContext);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => loadUser(), []);
   return (
     <div

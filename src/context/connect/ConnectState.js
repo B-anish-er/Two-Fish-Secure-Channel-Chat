@@ -24,11 +24,8 @@ const ConnectState = (props) => {
         config
       );
 
-      if (
-        res.data.msg === "no user found" ||
-        res.data.msg === "no connections found"
-      )
-        setState((prevValue) => ({ ...prevValue, error: res.data.msg }));
+      if (res.data.msg === "err")
+        setState((prevValue) => ({ ...prevValue, error: res.data.error }));
       else
         setState((prevValue) => ({
           ...prevValue,
@@ -62,7 +59,7 @@ const ConnectState = (props) => {
     }
   };
 
-  const createConnection = async (connectionName) => {
+  const createConnection = async (connectionName, username) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -71,13 +68,40 @@ const ConnectState = (props) => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/connection/`,
-        { connectionName },
+        `http://localhost:8000/api/connection/createconnection`,
+        { username, connectionName },
         config
       );
       console.log(res.data);
-      if (res.data.msg === "no user found")
-        setState((prevValue) => ({ ...prevValue, error: res.data.msg }));
+      if (res.data.msg === "err")
+        setState((prevValue) => ({ ...prevValue, error: res.data.error }));
+      else
+        setState((prevValue) => ({
+          ...prevValue,
+          error: null,
+          connections: res.data.connections,
+        }));
+    } catch (err) {
+      setState((prevValue) => ({ ...prevValue, error: err }));
+    }
+  };
+
+  const acceptConnection = async (connectionName, username) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/api/connection/acceptconnection`,
+        { username, connectionName },
+        config
+      );
+      console.log(res.data);
+      if (res.data.msg === "err")
+        setState((prevValue) => ({ ...prevValue, error: res.data.error }));
       else
         setState((prevValue) => ({
           ...prevValue,
