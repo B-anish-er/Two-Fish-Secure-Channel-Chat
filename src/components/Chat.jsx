@@ -1,7 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import axios from "axios";
+import "./Chat.css";
 // import { Link } from "react-router-dom";
 
 // import InputField from "./InputField";
@@ -9,33 +10,91 @@ import axios from "axios";
 import authContext from "../context/auth/authContext";
 import ConnectContext from "../context/connect/connectContext";
 import { twofish } from "twofish";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 // import * as Chats from "../chatExample.json";
 
-export default function Chat() {
+export default function Chat({ Key }) {
   const [messages, setMessages] = useState(null);
+  const [typedMessage, setTypedMessage] = useState("");
   const { user } = useContext(authContext);
   const { selectedConnection } = useContext(ConnectContext);
 
-  const getMessages = useCallback(async () => {
-    const res = await axios({
-      method: "GET",
-      url: `http://localhost:8000/api/messages?username=${user.name}&connectname=${selectedConnection}`,
-    });
-    setMessages(res.data);
-  }, [selectedConnection, user.name]);
+  const sendMessages = async () => {
+    var IV = [
+      0xb4, 0x6a, 0x02, 0x60, 0xb0, 0xbc, 0x49, 0x22, 0xb5, 0xeb, 0x07, 0x85,
+      0xa4, 0xb7, 0xcc, 0x9e,
+    ];
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { name } = user;
+    const time = Date.now();
+    if (!typedMessage) {
+      console.log("Message is null");
+      return;
+    }
+    if (!Key) {
+      console.log("Key is null");
+      return;
+    }
+    let messageByteArray = twofish(IV).stringToByteArray(typedMessage);
+    let keyByteArray = twofish(IV).stringToByteArray(Key);
+    let messageEncrypted = twofish(IV).encryptCBC(
+      keyByteArray,
+      messageByteArray
+    );
+    const chat = {
+      time,
+      name,
+      messageEncrypted,
+    };
+    // console.log(messageEncrypted);
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/api/createmessage`,
+        { username: name, connectname: selectedConnection, chat: chat },
+        config
+      );
+      console.log(res.data);
+      if (res.data.msg === "err")
+        // setState((prevValue) => ({ ...prevValue, error: res.data.error }));
+        console.log(res.data.err);
+      else setMessages((prevValue) => [...prevValue, chat]);
+    } catch (err) {
+      // setState((prevValue) => ({ ...prevValue, error: err }));
+      console.log(err);
+      setMessages((prevValue) => [...prevValue, chat]);
+    }
+  };
 
   useEffect(() => {
     var IV = [
       0xb4, 0x6a, 0x02, 0x60, 0xb0, 0xbc, 0x49, 0x22, 0xb5, 0xeb, 0x07, 0x85,
       0xa4, 0xb7, 0xcc, 0x9e,
     ];
+    const getMessages = async () => {
+      try {
+        const res = await axios.post("http://localhost:8000/api/messages", {
+          username: user.name,
+          connectname: selectedConnection,
+        });
+        setMessages(res.data.messages);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getMessages();
-    messages.map((value) => {
-      let plainMessage = twofish(IV).decryptCBC(value.message);
-      return { ...value, message: plainMessage };
-    });
-  }, [getMessages, messages]);
+    messages &&
+      messages.length !== 0 &&
+      messages.map((value) => {
+        let plainMessage = twofish(IV).decryptCBC(Key, value.message);
+        return { ...value, message: plainMessage };
+      });
+  }, [Key, messages, selectedConnection, user.name]);
 
   return (
     // <div>
@@ -53,44 +112,37 @@ export default function Chat() {
       {" "}
       <ChatWindow className="m-auto">
         <GrpName>
-          <p>Some Name</p>
+          <p>{selectedConnection}</p>
         </GrpName>
         <Scrollable className="m-auto">
-          <StyledLeftBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledLeftBubble>
-          <StyledRightBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledRightBubble>
-          <StyledRightBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledRightBubble>
-          <StyledLeftBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledLeftBubble>
-          <StyledLeftBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledLeftBubble>
-          <StyledRightBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledRightBubble>
-          <StyledRightBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledRightBubble>
-          <StyledLeftBubble>
-            aoidfjajosdifaposfdnp oasdnfoasdndf osndfosadnfpo
-          </StyledLeftBubble>
-          {messages.map((message) => {
-            return message.speaker === user.name ? (
-              <StyledRightBubble>message.message</StyledRightBubble>
-            ) : (
-              <StyledLeftBubble>message.message</StyledLeftBubble>
-            );
-          })}
+          <StyledLeftBubble>Hi</StyledLeftBubble>
+          <StyledRightBubble>Hello</StyledRightBubble>
+          <StyledRightBubble>Never gonna let you go</StyledRightBubble>
+          <StyledLeftBubble>Never gonna let you down</StyledLeftBubble>
+          {messages &&
+            messages.length !== 0 &&
+            messages.map((message) => {
+              return message.speaker === user.name ? (
+                <StyledRightBubble>message.messages</StyledRightBubble>
+              ) : (
+                <StyledLeftBubble>message.messages</StyledLeftBubble>
+              );
+            })}
+          {/* {console.log(JSON.stringify(messages))} */}
         </Scrollable>{" "}
         <ChatInput>
-          <input placeholder="Type Your Message"></input>
-          <p>send icon</p>
+          <input
+            placeholder="Type Your Message"
+            // value={typedMessage}
+            onChange={(e) => setTypedMessage(e.target.value)}
+          ></input>
+          <button
+            onClick={() => sendMessages()}
+            // style={{ all: "unset" }}
+          >
+            <FontAwesomeIcon icon={faPaperPlane} />
+            Send
+          </button>
         </ChatInput>
       </ChatWindow>
     </Container>

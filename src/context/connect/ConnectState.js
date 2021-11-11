@@ -43,7 +43,9 @@ const ConnectState = (props) => {
         error: "No connections found",
       }));
     else {
-      let found = state.connections.filter((value) => value === connectionName);
+      let found = Object.keys(state.connections).filter(
+        (value) => value === connectionName
+      );
       if (found.length === 0)
         setState((prevValue) => ({
           ...prevValue,
@@ -123,6 +125,7 @@ const ConnectState = (props) => {
         selectConnection,
         getAllConnections,
         createConnection,
+        acceptConnection,
       }}
     >
       {props.children}

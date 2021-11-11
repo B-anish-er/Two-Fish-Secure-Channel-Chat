@@ -16,19 +16,17 @@ export default function CreateChat() {
     getAllConnections,
     selectConnection,
     createConnection,
+    acceptConnection,
   } = useContext(connectContext);
   const { loadUser, user } = useContext(authContext);
   // const { alerts, setAlert } = useContext(alertContext);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => !user && loadUser(), []);
   useEffect(() => {
     getAllConnections(user.name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.name]);
-
-  const sendConnection = () => {
-    createConnection(connect, user.name);
-  };
 
   return (
     <Container
@@ -48,9 +46,23 @@ export default function CreateChat() {
         <h1 className="text-center mb-4">Connect With</h1>{" "}
         {connections &&
           Object.keys(connections).map((value) => (
-            <Link to="/" key={value} onClick={() => selectConnection(value)}>
+            <Link
+              to="/encryption"
+              key={value}
+              onClick={() => selectConnection(value)}
+            >
               {" "}
-              <h4>{value}</h4>{" "}
+              <h4>
+                {value}{" "}
+                {!connections[value] && (
+                  <button
+                    // style={{ all: "unset" }}
+                    onClick={() => acceptConnection(value, user.name)}
+                  >
+                    +
+                  </button>
+                )}
+              </h4>{" "}
             </Link>
           ))}
         <br />
@@ -67,7 +79,13 @@ export default function CreateChat() {
             value={connect}
             onChange={(e) => setConnect(e.target.value)}
           />
-          <StyledButton onClick={sendConnection}>Continue</StyledButton>
+          <StyledButton
+            onClick={() => {
+              createConnection(connect, user.name);
+            }}
+          >
+            Continue
+          </StyledButton>
           {error && (
             <p style={{ color: "red" }}>Error: {JSON.stringify(error)} </p>
           )}

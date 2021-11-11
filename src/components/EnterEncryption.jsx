@@ -1,19 +1,34 @@
-import React from "react";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
-// import {[;++++]}
 
 function EnterEncryption({ setKey }) {
+  const [attemptKey, setAttemptKey] = useState("");
+  const history = useHistory();
   return (
     <Container>
       <Box>
-        <Heading>Enter Encrytion Key</Heading>
+        <Heading>Enter Encryption Key</Heading>
         <KeyBox>
           <input
             type="text"
             placeholder="Enter Encryption Key"
-            onChange={(e) => setKey(e.target.value)}
+            onChange={(e) => setAttemptKey(e.target.value)}
+            // value={attemptKey}
           />
-          <i class="fas fa-paper-plane"></i>
+          <button
+            onClick={() => {
+              setKey(attemptKey);
+              // debugger;
+              history.push("/chat");
+            }}
+            // style={{ all: "unset" }}
+          >
+            <FontAwesomeIcon icon={faPaperPlane} color="blue" />
+            {/* <p style={{ color: "black" }}>Confirm</p> */}
+          </button>
         </KeyBox>
       </Box>
     </Container>
